@@ -1,4 +1,4 @@
-package ovh.major.songifyclient.client.controller;
+package ovh.major.songifyclient.client.domain;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ovh.major.songifyclient.client.SongifyProxy;
-import ovh.major.songifyclient.client.dto.*;
+import ovh.major.songifyclient.client.domain.dto.*;
 
 @Controller
 @Log4j2
-public class SongsViewController {
+class SongsViewController {
 
     private SongsDto database;
     private SongifyProxy songifyProxy;

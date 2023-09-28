@@ -1,4 +1,4 @@
-package ovh.major.songifyclient.client.configurations;
+package ovh.major.songifyclient.client.domain.configurations;
 
 import feign.codec.Decoder;
 import feign.jackson.JacksonDecoder;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class Config {
+class Config {
 
     @Bean
     public Decoder feighnDecoder() {

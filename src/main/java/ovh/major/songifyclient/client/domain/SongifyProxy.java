@@ -1,14 +1,14 @@
-package ovh.major.songifyclient.client;
+package ovh.major.songifyclient.client.domain;
 
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
-import ovh.major.songifyclient.client.dto.*;
+import ovh.major.songifyclient.client.domain.dto.*;
 
 @Component
 @FeignClient(value = "songify-client", url = "${app.url}")
-public interface SongifyProxy {
+interface SongifyProxy {
 
     @GetMapping("/songs")
     SongsDto getAllSongs();
