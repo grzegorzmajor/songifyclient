@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-class Config {
+class FeignConfiguration {
 
     @Bean
-    public Decoder feighnDecoder() {
+    public Decoder feignDecoder() {
         return new JacksonDecoder();
     }
     @Bean
