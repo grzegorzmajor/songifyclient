@@ -6,7 +6,7 @@
     <body>
         <a href="/" >| Home</a>
         <hr>
-         <div th:if="${e!= null}"><span th:text="'ERROR ' + ${e}"></span></div>
+         <div th:if="${error!= null}"><span th:text="'ERROR ' + ${error}"></span></div>
         <hr>
         <h1>Song List</h1>
         <ul>
@@ -16,42 +16,42 @@
         </ul>
 
         <hr>
-        <h2>DODAJ PIOSENKĘ</h2>
+        <h2>ADD A SONG</h2>
         <form action="/songs" method="post">
-            <label for="songName">Podaj nazwę piosenki:</label>
+            <label for="songName">Enter the name of the song:</label>
             <input type="text" required id="songName" name="songName">
-            <label for="artist">Podaj autora:</label>
+            <label for="artist">Name the author:</label>
             <input type="text" required id="artist" name="artist">
-            <button type="submit">Dodaj piosenkę</button>
+            <button type="submit">Add songs</button>
         </form>
         <hr>
-        <h2>WYŚWIETL PIOSENKĘ PO ID</h2>
+        <h2>VIEW SONG BY ID</h2>
         <form action="/songs" method="get">
-            <label for="songId">Podaj ID piosenki:</label>
+            <label for="songId">Enter the song ID:</label>
             <input type="number" required min="1" id="songId" name="id">
-            <button type="submit">Przejdź do piosenki</button>
+            <button type="submit">Show the song</button>
         </form>
         <div th:if="${song != null}">
             <h2 th:text="${song.songName}"></h2>
             <p th:text="${song.artist}"></p>
         </div>
         <hr>
-        <h2>USUŃ PIOSENKĘ</h2>
+        <h2>DELETE THE SONG</h2>
         <form action="/deletesong" method="post">
-            <label for="songId">Podaj ID piosenki:</label>
+            <label for="songId">Enter the song ID:</label>
             <input type="number" required min="1" id="songId" name="id">
-            <button type="submit">Usuń piosenkę</button>
+            <button type="submit">Delete song</button>
         </form>
         <hr>
-        <h2>EDYTUJ PIOSENKĘ</h2>
+        <h2>EDIT SONG</h2>
         <form action="/edit" method="post">
-            <label for="songId">Podaj ID piosenki do edycji:</label>
+            <label for="songId">Enter the ID of the song to edit:</label>
             <input type="number" required min="1" id="songId" name="id">
-            <label for="songName">Podaj nazwę piosenki:</label>
+            <label for="songName">Enter the name of the song:</label>
             <input type="text" id="songName" name="songName">
-            <label for="artist">Podaj autora:</label>
+            <label for="artist">Name the author:</label>
             <input type="text" id="artist" name="artist">
-            <button type="submit">Zaktualizuj piosenkę</button>
+            <button type="submit">Update the song</button>
         </form>
     </body>
 </html>

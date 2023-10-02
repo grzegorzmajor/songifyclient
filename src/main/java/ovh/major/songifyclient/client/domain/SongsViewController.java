@@ -15,7 +15,7 @@ class SongsViewController {
 
     private SongsDto database;
     private SongifyProxy songifyProxy;
-    private String ex;
+    private String error;
 
     @Autowired
     public SongsViewController(SongifyProxy songifyProxy) {
@@ -29,12 +29,12 @@ class SongsViewController {
         return "viewSongs.html";
     }
 
-    @GetMapping("/e")
+    @GetMapping("/error")
     public String e(Model model) {
         this.database = songifyProxy.getAllSongs();
         model.addAttribute("songMap", database);
-        model.addAttribute("e", ex);
-        ex = null;
+        model.addAttribute("error", error);
+        error = null;
         return "viewSongs.html";
     }
 
@@ -44,9 +44,9 @@ class SongsViewController {
         try {
             song = songifyProxy.getSongById(id);
         } catch (Exception exception) {
-            log.warn("Bład klienta: " + exception);
-            ex = exception.toString();
-            return "redirect:/e";
+            log.warn("ERROR: " + exception);
+            //ex = exception.toString();
+            return "redirect:/error";
         }
         model.addAttribute("songMap", database);
         model.addAttribute("song", song);
@@ -60,7 +60,7 @@ class SongsViewController {
                 .artist(artist)
                 .build();
         songifyProxy.postSong(singleSongRequestDto);
-        log.info("wysłano rządanie dodania nowej piosenki");
+        log.info("a request to add a new song has been sent");
         return "redirect:/";
     }
 
@@ -69,11 +69,11 @@ class SongsViewController {
         try {
             songifyProxy.deleteSong(id);
         } catch (Exception exception) {
-            log.warn("Bład klienta: " + exception);
-            ex = exception.toString();
+            log.warn("ERROR: " + exception);
+            //ex = exception.toString();
             return "redirect:/e";
         }
-        log.info("wysłano rządanie usunięcia nowej piosenki");
+        log.info("a removal request has been submitted");
         return "redirect:/";
     }
 
@@ -89,9 +89,9 @@ class SongsViewController {
                 songifyProxy.putSong(id, request);
                 return "redirect:/";
             } catch (Exception exception) {
-                log.warn("Bład klienta: " + exception);
-                ex = exception.toString();
-                return "redirect:/e";
+                log.warn("ERROR: " + exception);
+                //ex = exception.toString();
+                return "redirect:/error";
             }
         }
         if (!artist.isBlank()) {
@@ -102,9 +102,9 @@ class SongsViewController {
                 songifyProxy.patchArtist(id, request);
                 return "redirect:/";
             } catch (Exception exception) {
-                log.warn("Bład klienta: " + exception);
-                ex = exception.toString();
-                return "redirect:/e";
+                log.warn("ERROR: " + exception);
+                //ex = exception.toString();
+                return "redirect:/error";
             }
         }
 
@@ -116,15 +116,15 @@ class SongsViewController {
                 songifyProxy.patchSongName(id, request);
                 return "redirect:/";
             } catch (Exception exception) {
-                log.warn("Bład klienta: " + exception);
-                ex = exception.toString();
-                return "redirect:/e";
+                log.warn("ERROR: " + exception);
+                //ex = exception.toString();
+                return "redirect:/error";
             }
         }
 
-        log.warn("Bład klienta: " + "klient nie podał danych do aktualizacji.");
-        ex = " ERROR: aby edytować piosenkę, musisz cokolwiek wpisać w polę artist lub songName";
-        return "redirect:/e";
+        log.warn("ERROR: " + "no data to update");
+        error = " ERROR: To edit a song, you must enter anything in the artist or songName field";
+        return "redirect:/error";
     }
 
 }
